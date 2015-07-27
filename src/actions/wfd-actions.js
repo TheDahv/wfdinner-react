@@ -2,12 +2,23 @@ import AppDispatcher from '../dispatcher/app-dispatcher';
 import WfdConstants from '../constants/wfd-constants';
 
 export default {
-  addIngredient (day, meal, ingredient) {
+  addIngredient (day = '', meal = '', ingredient) {
     AppDispatcher.dispatch({
-      day,
-      meal,
       ingredient,
-      actionType: WfdConstants.MEAL_ADD_INGREDIENT
+
+      actionType: WfdConstants.MEAL_ADD_INGREDIENT,
+      day: day.toLowerCase(),
+      meal: meal.toLowerCase()
     });
+  },
+
+  removeIngredientAtIndex (day = '', meal = '', index) {
+    AppDispatcher.dispatch({
+      index,
+
+      actionType: WfdConstants.MEAL_REMOVE_INGREDIENT_AT_INDEX,
+      day: day.toLowerCase(),
+      meal: meal.toLowerCase()
+    })
   }
 };

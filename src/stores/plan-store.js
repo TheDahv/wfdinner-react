@@ -74,8 +74,14 @@ class PlanStore extends Store {
     this.getDay(day)[meal].ingredients.push(ingredient);
   }
 
+  removeIngredientAtIndex (day, meal, index) {
+    this.getDay(day)[meal].ingredients.splice(index, 1);
+  }
+
   registerActions () {
     AppDispatcher.register((action) => {
+      let {day, meal} = action;
+
       switch (action.actionType) {
         case WfdConstants.MEAL_UPDATE:
           this.updateDay(action.day, action.meal, action.data);
@@ -83,8 +89,14 @@ class PlanStore extends Store {
           break;
 
         case WfdConstants.MEAL_ADD_INGREDIENT:
-          let {day, meal, ingredient} = action;
+          let {ingredient} = action;
           this.addIngredient(day, meal, ingredient);
+          this.emitChange();
+          break;
+
+        case WfdConstants.MEAL_REMOVE_INGREDIENT_AT_INDEX:
+          let {index} = action;
+          this.removeIngredientAtIndex(day, meal, index);
           this.emitChange();
           break;
       }

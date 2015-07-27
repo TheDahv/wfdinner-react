@@ -1,3 +1,4 @@
+import DeletableListItem from './deletable-list-item';
 import EditableListItem from './editable-list-item';
 import WfdActions from '../actions/wfd-actions';
 import React from 'react';
@@ -9,6 +10,7 @@ export default class Meal extends React.Component {
     super();
 
     this._addIngredient = this._addIngredient.bind(this);
+    this._onRequestDelete = this._onRequestDelete.bind(this);
   }
 
   render () {
@@ -32,8 +34,11 @@ export default class Meal extends React.Component {
         <label htmlFor="{this.props.name}-ingredients">Ingredients</label>
         <ul>
           {
-            this.props.data.ingredients.map((ingredient) => {
-              return <li>{ingredient}</li>
+            this.props.data.ingredients.map((ingredient, index) => {
+              return (
+                <DeletableListItem item={ingredient} index={index}
+                    onRequestDelete={this._onRequestDelete} />
+              );
             })
           }
           <EditableListItem day={this.props.day} meal={this.props.meal}
@@ -55,9 +60,17 @@ export default class Meal extends React.Component {
 
   _addIngredient (ingredient) {
     WfdActions.addIngredient(
-        this.props.day,
-        this.props.meal.toLowerCase(),
-        ingredient
+      this.props.day,
+      this.props.meal,
+      ingredient
+    );
+  }
+
+  _onRequestDelete (index) {
+    WfdActions.removeIngredientAtIndex(
+      this.props.day,
+      this.props.meal,
+      index
     );
   }
 };

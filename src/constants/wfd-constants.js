@@ -2,7 +2,8 @@ import keymirror from 'keymirror';
 
 let constants = keymirror({
   MEAL_UPDATE: null,
-  MEAL_ADD_INGREDIENT: null
+  MEAL_ADD_INGREDIENT: null,
+  MEAL_REMOVE_INGREDIENT_AT_INDEX: null
 });
 
 constants.DAYS = [
