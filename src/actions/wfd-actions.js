@@ -2,6 +2,17 @@ import AppDispatcher from '../dispatcher/app-dispatcher';
 import WfdConstants from '../constants/wfd-constants';
 
 export default {
+  updateMeal (day = '', meal = '', field, value) {
+    AppDispatcher.dispatch({
+      field,
+      value,
+
+      actionType: WfdConstants.MEAL_UPDATE,
+      day: day.toLowerCase(),
+      meal: meal.toLowerCase()
+    });
+  },
+
   addIngredient (day = '', meal = '', ingredient) {
     AppDispatcher.dispatch({
       ingredient,

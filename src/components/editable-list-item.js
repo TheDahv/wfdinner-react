@@ -48,8 +48,6 @@ export default class EditableListItem extends React.Component {
   }
 
   _saveInput (value) {
-    console.log(`Adding ${value} to ${this.props.meal} on ${this.props.day}!`);
-
     this.props.onItemAdded(value);
 
     this.setState({

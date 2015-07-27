@@ -57,16 +57,13 @@ class PlanStore extends Store {
    * Given a `day` in the plan, merge `data` into the meal plan for that day.
    *
    * {day} string - Should be the name of the day: e.g., 'monday'.
-   * {data} object - A key-value pair, representing the data to set and where
-   *    to set it.
+   * {meal} string - Should be the name of the meal: e.g., 'breakfast'.
+   * {field} string - The name of the field to set in the plan.
+   * {value} any - The value to set the field.
    */
-  updateDay (day = '', meal = '', data = {}) {
-    let dayData = this.getDay(day);
-    if (dayData && Object.keys(dayData).length) {
-      let meal = dayData[meal];
-      if (meal) {
-        _.extend(meal, data);
-      }
+  updateDay (day = '', meal = '', field, value) {
+    if (_plan[day] && _plan[day][meal]) {
+      _plan[day][meal][field] = value;
     }
   }
 
@@ -84,7 +81,8 @@ class PlanStore extends Store {
 
       switch (action.actionType) {
         case WfdConstants.MEAL_UPDATE:
-          this.updateDay(action.day, action.meal, action.data);
+          let {field, value} = action;
+          this.updateDay(action.day, action.meal, field, value);
           this.emitChange();
           break;
 

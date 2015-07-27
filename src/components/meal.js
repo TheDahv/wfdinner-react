@@ -48,14 +48,15 @@ export default class Meal extends React.Component {
     );
   }
 
-  _onBlur (name, e) {
-    e.preventDefault();
+  _onBlur (field, {target}) {
+    let {value} = target;
 
-    let {value} = e.target;
-
-    console.log({
-      [name]: value
-    });
+    WfdActions.updateMeal(
+      this.props.day,
+      this.props.meal,
+      field,
+      value
+    );
   }
 
   _addIngredient (ingredient) {
