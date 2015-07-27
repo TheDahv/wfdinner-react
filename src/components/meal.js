@@ -1,17 +1,22 @@
+import EditableListItem from './editable-list-item';
+import WfdActions from '../actions/wfd-actions';
 import React from 'react';
+
 const {PropTypes} = React;
 
 export default class Meal extends React.Component {
   constructor () {
     super();
+
+    this._addIngredient = this._addIngredient.bind(this);
   }
 
   render () {
     return (
       <div className="meal">
-        <h3>{this.props.name}</h3>
+        <h3>{this.props.meal}</h3>
         <p>
-          <label htmlFor="{this.props.name}-name">Name</label>
+          <label htmlFor="{this.props.meal}-name">Name</label>
           <input type="text" val="{this.props.data.name}"
             onBlur={this._onBlur.bind(this, 'name')}
           />
@@ -31,6 +36,8 @@ export default class Meal extends React.Component {
               return <li>{ingredient}</li>
             })
           }
+          <EditableListItem day={this.props.day} meal={this.props.meal}
+              onItemAdded={this._addIngredient} />
         </ul>
       </div>
     );
@@ -45,9 +52,18 @@ export default class Meal extends React.Component {
       [name]: value
     });
   }
+
+  _addIngredient (ingredient) {
+    WfdActions.addIngredient(
+        this.props.day,
+        this.props.meal.toLowerCase(),
+        ingredient
+    );
+  }
 };
 
 Meal.propTypes = {
-  name: PropTypes.string.isRequired,
+  day: PropTypes.string.isRequired,
+  meal: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired
 };

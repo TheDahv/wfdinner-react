@@ -8,6 +8,12 @@ export default class WfdApp extends React.Component {
     this.state = {
       plan: PlanStore.createFromTemplate()
     };
+
+    PlanStore.addChangeListener(() => {
+      this.setState({
+        plan: PlanStore.getPlan()
+      });
+    });
   }
 
   render () {

@@ -12,9 +12,12 @@ export default class Day extends React.Component {
       <div className="day">
         <h2>{day}</h2>
 
-        <Meal name={"Breakfast"} data={this.props.data.breakfast} />
-        <Meal name={"Lunch"} data={this.props.data.lunch} />
-        <Meal name={"Dinner"} data={this.props.data.dinner} />
+        <Meal day={this.props.day} meal={"Breakfast"}
+              data={this.props.data.breakfast} />
+        <Meal day={this.props.day} meal={"Lunch"}
+              data={this.props.data.lunch} />
+        <Meal day={this.props.day} meal={"Dinner"}
+              data={this.props.data.dinner} />
       </div>
     );
   }

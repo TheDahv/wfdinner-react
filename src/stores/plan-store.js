@@ -32,15 +32,20 @@ const TEMPLATE = _.reduce(DAYS, (total, day) => {
   return total;
 }, {});
 
-export default class PlanStore extends Store {
-  static createFromTemplate () {
-    return _.extend({}, TEMPLATE);
+class PlanStore extends Store {
+  createFromTemplate () {
+    _plan = _.extend({}, TEMPLATE);
+    return _plan;
   }
 
   constructor () {
     super();
 
     this.registerActions();
+  }
+
+  getPlan () {
+    return _plan;
   }
 
   getDay (day = '') {
@@ -65,6 +70,10 @@ export default class PlanStore extends Store {
     }
   }
 
+  addIngredient (day, meal, ingredient) {
+    this.getDay(day)[meal].ingredients.push(ingredient);
+  }
+
   registerActions () {
     AppDispatcher.register((action) => {
       switch (action.actionType) {
@@ -72,7 +81,15 @@ export default class PlanStore extends Store {
           this.updateDay(action.day, action.meal, action.data);
           this.emitChange();
           break;
+
+        case WfdConstants.MEAL_ADD_INGREDIENT:
+          let {day, meal, ingredient} = action;
+          this.addIngredient(day, meal, ingredient);
+          this.emitChange();
+          break;
       }
     });
   }
 };
+
+export default new PlanStore();
