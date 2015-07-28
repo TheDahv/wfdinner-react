@@ -13,11 +13,17 @@ export default class Day extends React.Component {
         <h2>{day}</h2>
 
         <Meal day={this.props.day} meal={"Breakfast"}
-              data={this.props.data.breakfast} />
+              data={this.props.data.breakfast}
+              key={`meal-${day}-breakfast`}
+              />
         <Meal day={this.props.day} meal={"Lunch"}
-              data={this.props.data.lunch} />
+              data={this.props.data.lunch}
+              key={`meal-${day}-lunch`}
+              />
         <Meal day={this.props.day} meal={"Dinner"}
-              data={this.props.data.dinner} />
+              data={this.props.data.dinner}
+              key={`meal-${day}-dinner`}
+              />
       </div>
     );
   }

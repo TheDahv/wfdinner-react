@@ -68,11 +68,15 @@ class PlanStore extends Store {
   }
 
   addIngredient (day, meal, ingredient) {
-    this.getDay(day)[meal].ingredients.push(ingredient);
+    if (_plan[day] && _plan[day][meal]) {
+      _plan[day][meal].ingredients.push(ingredient);
+    }
   }
 
   removeIngredientAtIndex (day, meal, index) {
-    this.getDay(day)[meal].ingredients.splice(index, 1);
+    if (_plan[day] && _plan[day][meal]) {
+      _plan[day][meal].ingredients.splice(index, 1);
+    }
   }
 
   registerActions () {
@@ -98,6 +102,8 @@ class PlanStore extends Store {
           this.emitChange();
           break;
       }
+
+      console.dir(_plan);
     });
   }
 };

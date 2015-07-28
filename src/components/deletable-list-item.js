@@ -60,14 +60,12 @@ export default class DeletableListItem extends React.Component {
   }
 
   _setHover () {
-    console.log("setting hover");
     this.setState({
       hover: true
     });
   }
 
   _releaseHover () {
-    console.log("releasing hover");
     this.setState({
       hover: false
     });

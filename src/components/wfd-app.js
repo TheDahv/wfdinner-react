@@ -17,6 +17,6 @@ export default class WfdApp extends React.Component {
   }
 
   render () {
-    return <Plan plan={this.state.plan || {}} />;
+    return <Plan plan={this.state.plan} />;
   }
 }

@@ -6,14 +6,15 @@ import React from 'react';
 const {PropTypes} = React;
 
 export default class Meal extends React.Component {
-  constructor () {
-    super();
+  constructor (...args) {
+    super(...args);
 
     this._addIngredient = this._addIngredient.bind(this);
     this._onRequestDelete = this._onRequestDelete.bind(this);
   }
 
   render () {
+    debugger;
     return (
       <div className="meal">
         <h3>{this.props.meal}</h3>
@@ -37,7 +38,9 @@ export default class Meal extends React.Component {
             this.props.data.ingredients.map((ingredient, index) => {
               return (
                 <DeletableListItem item={ingredient} index={index}
-                    onRequestDelete={this._onRequestDelete} />
+                    onRequestDelete={this._onRequestDelete}
+                    key={`ingredient-${index}`}
+                    />
               );
             })
           }
@@ -73,6 +76,10 @@ export default class Meal extends React.Component {
       this.props.meal,
       index
     );
+  }
+
+  componentWillReceiveProps (newProps) {
+    debugger;
   }
 };
 
