@@ -1,8 +1,7 @@
 import Day from './day';
-import TabGroup from './tabs/tab-group';
-import TabMember from './tabs/tab-member';
 import React from 'react';
 import {DAYS} from '../constants/wfd-constants';
+import {TabGroup, TabMember} from './tabs';
 
 const {PropTypes} = React;
 
